@@ -8,12 +8,10 @@
  */
 package com.lllddd.fruitsserver.controller
 
-import com.lllddd.fruitsserver.FruitsServerApplication
 import com.lllddd.fruitsserver.entity.FruitEntity
 import com.lllddd.fruitsserver.mapper.FruitsMapper
 import com.lllddd.fruitsserver.resp.Resp
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.SpringApplication
 import org.springframework.web.bind.annotation.*
 
 /**
