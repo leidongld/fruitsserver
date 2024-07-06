@@ -1,0 +1,82 @@
+
+
+
+server:
+  port: 8080
+spring:
+  application:
+    name: fruitsserver
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: lllddd
+    driver-class-name: org.postgresql.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化时建立物理连接的个数
+      initial-size: 5
+      # 最小连接池数量
+      min-idle: 5
+      # 最大连接池数量
+      max-active: 20
+      # 获取连接时最大等待时间，单位毫秒
+      max-wait: 60000
+      # 有两个含义：1) Destroy线程会检测连接的间隔时间 2) testWhileIdle的时间间隔
+      time-between-eviction-runs-millis: 60000
+      # 连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      # 用来检测连接是否有效的sql，要求是一个查询语句
+      validation-query: SELECT 1 FROM DUAL
+      # 建议配置为true，不影响性能，并且保证安全性
+      test-while-idle: true
+      # 申请连接时执行validationQuery检测连接是否有效
+      test-on-borrow: false
+      # 归还连接时执行validationQuery检测连接是否有效
+      test-on-return: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      pool-prepared-statements: true
+      # 指定每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的filters
+      filters: stat,wall,log4j
+      # 配置WebStatFilter
+      web-stat-filter:
+        # 是否启用StatFilter
+        enabled: true
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略的格式
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+      # 配置StatViewServlet
+      stat-view-servlet:
+        # 是否启用StatViewServlet
+        enabled: true
+        # URL匹配模式
+        url-pattern: /druid/*
+        # 是否允许重置数据
+        reset-enable: true
+        # 访问用户名
+        login-username: druid
+        # 访问密码
+        login-password: lllddd
+        # 白名单
+        allow: 127.0.0.1
+        # 黑名单 (存在共同时，deny优先于allow)
+        # deny: 192.168.1.20
+      # 配置StatFilter
+      filter:
+        stat:
+          # 是否记录慢查询
+          log-slow-sql: true
+          # 慢查询阈值
+          slow-sql-millis: 3000
+
+mybatis:
+  # MyBatis mapper文件路径，根据实际位置修改
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类包路径，MyBatis会自动查找该包下的类
+  type-aliases-package: com.lllddd.demo.mapper
+  # 开启驼峰命名转换
+  configuration:
+    map-underscore-to-camel-case: true
+debug: true
